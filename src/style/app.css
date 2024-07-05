@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+:root {
+  --font-family: "Nunito Sans", sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+}
+body {
+  background: #202c36;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 48px;
+}
+.scroll_top {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  animation: animateScroll 1s linear infinite alternate-reverse;
+}
+
+.scroll_top,
+.scroll_top img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  width: 50px;
+}
+
+@keyframes animateScroll {
+  0% {
+    transform: translateY(-0.5rem);
+  }
+  100% {
+    transform: translateY(1rem);
+  }
+}
+
+.containerWhite {
+  background: #fff;
+  color: #111517;
+    fill: #111517;
+  input {
+    color: #111517;
+  }
+  h3,
+  p,
+  span {
+    color: #111517;
+  }
+}
+#containerWhite {
+  background: #fff;
+}
+.btn {
+  background: none;
+  border: none;
+  color: #111517;
+  width: 136px;
+  height: 40px;
+  border-radius: 6px;
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.29);
+  &:hover {
+    cursor: pointer;
+    border: 1px solid #111517;
+  }
+}
+
+.infoTextSkeleton {
+  width: 574px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+}
+
+.mb-23 {
+  margin-bottom: 23px;
+}
+.imgSkeleton {
+  width: 560px;
+  height: 401px;
+  border-radius: 10px;
+  margin-bottom: 90px;
+}
