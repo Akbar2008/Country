@@ -32,10 +32,13 @@ export const Main = () => {
             : json
         );
         setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, [inpValue]);
   const BtnRef = useRef();
-  useEffect(()=>{
+  useEffect(() => {
     BtnRef.current.style.display = "none";
     window.onscroll = function () {
       scrollFunction();
@@ -43,8 +46,8 @@ export const Main = () => {
 
     function scrollFunction() {
       if (
-        document.body.scrollTop > 20 ||
-        document.documentElement.scrollTop > 20
+        document.body.scrollTop > 200 ||
+        document.documentElement.scrollTop > 200
       ) {
         BtnRef.current.style.display = "block";
       } else {
@@ -58,7 +61,7 @@ export const Main = () => {
       document.documentElement.scrollTop = 0;
     }
     BtnRef.current.addEventListener("click", topFunction);
-  },[])
+  }, []);
   const optionsText = [
     { id: 1, title: "All" },
     { id: 2, title: "Africa" },
@@ -107,6 +110,7 @@ export const Main = () => {
               const { id, title } = item;
               return (
                 <p
+                  className={isDark ? "textColor" : ""}
                   key={id}
                   onClick={() => {
                     setText(title);
@@ -124,7 +128,6 @@ export const Main = () => {
         {isLoading && <CardSkleton cards={addInfo} />}
         {todoData.map((item, index) => {
           if (index < addInfo) {
-            console.log(index);
             const {
               name,
               region,
@@ -159,7 +162,7 @@ export const Main = () => {
           }
         })}
       </div>
-       {/* <img src="/img/smile.png" alt="smile" /> */}
+      {/* <img src="/img/smile.png" alt="smile" /> */}
       <button
         className={addInfo > 250 || inpValue.length > 0 ? "show" : "addBtn"}
         onClick={() => {

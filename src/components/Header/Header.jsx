@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 export const Header = () => {
   const { isDark, setDark } = useContext(Context);
-  console.log(isDark);
   return (
     <header className={isDark ? "header_mode-theme" : ""}>
       <Link to="/">
