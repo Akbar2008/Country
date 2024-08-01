@@ -3,6 +3,7 @@ import { useContext, useEffect, useRef } from "react";
 import Search from "../../../public/icon/search.svg";
 import SearchTh from "../../../public/icon/searchtheme.svg";
 import Down from "../../../public/icon/down.svg";
+import WithDown from "../../../public/icon/withDown.svg";
 import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -18,8 +19,13 @@ export const Main = () => {
   const [inpValue, outValue] = useState("");
   const [todoData, setTodoData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [region, setRegion] = useState("all");
   useEffect(() => {
-    fetch(`https://restcountries.com/v3.1/all`)
+    fetch(
+      `https://restcountries.com/v3.1/${
+        region === "all" ? "all" : "region/" + region
+      }`
+    )
       .then((response) => response.json())
       .then((json) => {
         setTodoData(
@@ -36,7 +42,7 @@ export const Main = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [inpValue]);
+  }, [inpValue || isText]);
   const BtnRef = useRef();
   useEffect(() => {
     BtnRef.current.style.display = "none";
@@ -63,7 +69,7 @@ export const Main = () => {
     BtnRef.current.addEventListener("click", topFunction);
   }, []);
   const optionsText = [
-    { id: 1, title: "All" },
+    { id: 1, title: "all" },
     { id: 2, title: "Africa" },
     { id: 3, title: "America" },
     { id: 4, title: "Asia" },
@@ -74,7 +80,9 @@ export const Main = () => {
     <main>
       <div className="main_search">
         <form
-          className={isDark ? "containerWhite" : ""}
+          className={
+            (isDark ? "containerWhite" : "") 
+          }
           onSubmit={(e) => {
             e.preventDefault();
           }}
@@ -100,7 +108,12 @@ export const Main = () => {
               setCount(count ? false : true);
             }}
           >
-            {isText} <Down className={!count ? "down" : ""} />
+            {isText}{" "}
+            {isDark ? (
+              <WithDown className={!count ? "down" : ""} />
+            ) : (
+              <Down className={!count ? "down" : ""} />
+            )}
           </div>
           <div
             className={!count ? "show" : "option_abs "}
@@ -113,11 +126,11 @@ export const Main = () => {
                   className={isDark ? "textColor" : ""}
                   key={id}
                   onClick={() => {
-                    setText(title);
+                    setText(title), setRegion(title);
                   }}
                 >
                   {" "}
-                  {title}{" "}
+                  {title == "all" ? "All" : title}{" "}
                 </p>
               );
             })}
@@ -126,45 +139,60 @@ export const Main = () => {
       </div>
       <div className={addInfo == 1 ? "main_flagsOne" : "main_flags"}>
         {isLoading && <CardSkleton cards={addInfo} />}
-        {todoData.map((item, index) => {
-          if (index < addInfo) {
-            const {
-              name,
-              region,
-              flags: { png },
-              population,
-              capital,
-            } = item;
-            return (
-              <Link to={`/country/${name.common}`} key={index}>
-                <div className={!isDark ? "card" : "card containerWhite"}>
-                  <img src={png} alt={region} />
-                  <div className="flags_info">
-                    <h3>{name.common || <Skeleton />}</h3>
-                    <div className="info_list">
-                      <p>
-                        Population:
-                        <span> {population || <Skeleton />}</span>
-                      </p>
-                      <p>
-                        Region:
-                        <span>{region || <Skeleton />}</span>
-                      </p>
-                      <p>
-                        Capital:
-                        <span>{capital || <Skeleton />}</span>
-                      </p>
+        {todoData.length > 0 ? (
+          todoData.map((item, index) => {
+            if (index < addInfo) {
+              const {
+                name,
+                region,
+                flags: { png },
+                population,
+                capital,
+              } = item;
+              return (
+                <Link to={`/country/${name.common}`} key={index}>
+                  <div className={!isDark ? "card" : "card containerWhite"}>
+                    <img src={png} alt={region + " not found"} />
+                    <div className="flags_info">
+                      <h3>{name.common || "common not found"}</h3>
+                      <div className="info_list">
+                        <p>
+                          Population:
+                          <span>
+                            {" "}
+                            {population.toLocaleString() ||
+                              "population not found"}
+                          </span>
+                        </p>
+                        <p>
+                          Region:
+                          <span>{region || "region  not found"}</span>
+                        </p>
+                        <p>
+                          Capital:
+                          <span>{capital || "capital not found"}</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            );
-          }
-        })}
+                </Link>
+              );
+            }
+          })
+        ) : (
+          <p className={isDark ? "textColor fontP" : "fontP"}>
+            Nothing to see...
+          </p>
+        )}
       </div>
       {/* <img src="/img/smile.png" alt="smile" /> */}
       <button
-        className={addInfo > 250 || inpValue.length > 0 ? "show" : "addBtn"}
+        className={
+          (addInfo > todoData.length || inpValue.length > 0
+            ? "show "
+            : "addBtn")||( isDark ? "addBtn black" : "addBtn")
+        }
+        style={isDark ? {color: '#000', border: '1px solid black'} : {}}
         onClick={() => {
           setaddInfo((addInfo) => addInfo + 4);
         }}

@@ -65,6 +65,7 @@ input[type="text"] {
   line-height: 143%;
   color: #fff;
   cursor: pointer;
+  text-transform: capitalize;
 }
 
 .option_abs {
@@ -174,15 +175,16 @@ h3 {
   width: 168px;
   height: 55px;
   border-radius: 5px;
-  background: #161717;
+  background: none;
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 17px;
-  line-height: 143%;
   border: none;
   cursor: pointer;
   -webkit-box-reflect: below 1px linear-gradient(transparent, #0004);
-  color: #fff;
+  color: #fff ;
+  border: 1px solid #fff;
+  font-weight: 600;
 }
 
 .show {
@@ -212,5 +214,29 @@ h3 {
 }
 
 .textColor {
+  text-transform: capitalize;
   color: #161717 !important;
+}
+.fontP {
+  color: #fff;
+  font-family: consolas;
+  font-size: 24px;
+  text-transform: capitalize;
+}
+.black {
+  color: #000 !important;
+  border: 1px solid #000;
+}
+.border {
+  animation: animationBorder .2s 2 alternate-reverse;
+  border: 1px solid red;
+}
+
+@keyframes animationBorder {
+  from {
+    transform: translateX(20px);
+  }
+  to {
+    transform: translateX(-20px);
+  }
 }

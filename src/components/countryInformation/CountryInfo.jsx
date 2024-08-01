@@ -27,7 +27,7 @@ export const CountryInfo = () => {
       </Link>
       
       {isLoading ? <InfoCardSkeleton/> : data?.map((item, index) => {
-        console.log(item);
+
         const {
           area,
           altSpellings,
@@ -66,7 +66,7 @@ export const CountryInfo = () => {
                     </p>
                     <p>
                       Population:
-                      <span>{population || <Skeleton />}</span>
+                      <span>{population.toLocaleString() || <Skeleton />}</span>
                     </p>
                     <p>
                       Region:
@@ -74,7 +74,7 @@ export const CountryInfo = () => {
                     </p>
                     <p>
                       Sub Region:
-                      <span>{subregion || <Skeleton />}</span>
+                      <span>{subregion || "subregion not found"}</span>
                     </p>
                     <p>
                       Capital:

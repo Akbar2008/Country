@@ -1,8 +1,10 @@
-# React + Vite
+##Country information
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+`Searching for information about countries can be very beneficial and interesting. It allows you to learn a lot about various aspects of different countries such as their history, culture, economy, geography, climate, and more. Using these approaches, you can find comprehensive and reliable information about the country you are researching. To obtain more extensive and in-depth information about countries, it is advisable to use multiple sources.`
 
-Currently, two official plugins are available:
+<br/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![alt](/public/CountryHome.png)
+
+
+<a herf='https://country-eight-lake.vercel.app/'> country-eight-lake</a>
